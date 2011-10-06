@@ -60,7 +60,7 @@ svmsgd.o: svmsgd.cpp data.h loss.h ${INCS}
 svmsgdqn.o: svmsgdqn.cpp data.h loss.h ${INCS}
 	${CXX} ${CXXFLAGS} -c -o $@ svmsgdqn.cpp
 
-svmasgd.o: svmasgd.cpp data.h loss.h $L/vectors.h $L/gzstream.h $L/timer.h $L/wrapper.h $L/assert.h
+svmasgd.o: svmasgd.cpp data.h loss.h ${INCS}
 	${CXX} ${CXXFLAGS} -c -o $@ svmasgd.cpp
 
 prep_rcv1: prep_rcv1.o ${OBJS}
