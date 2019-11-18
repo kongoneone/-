@@ -38,12 +38,17 @@
 # define HAS_UNIFORMINT 1
 #endif
 
-#if HAS_UNIFORMINTDISTRIBUTION
-# include <random>
-typedef std::uniform_int_distribution<int> uniform_int_generator;
-#elif HAS_UNIFORMINT
+#if HAS_UNIFORMINT
 # include <tr1/random>
 typedef std::tr1::uniform_int<int> uniform_int_generator;
+#elif  HAS_UNIFORMINTDISTRIBUTION
+# include <random>
+struct uniform_int_generator { 
+  std::mt19937 gen;
+  std::uniform_int_distribution<int> dist;
+  uniform_int_generator(int imin, int imax) : dist(imin,imax) {}
+  int operator()() { return dist(gen); }
+};
 #else
 struct uniform_int_generator { 
   int imin, imax; 
